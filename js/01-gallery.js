@@ -39,8 +39,6 @@ function openModal(event) {
             instance.close();
         }
     }
-
-    console.dir(instance);
 }
 
-// console.log(galleryItems);
+console.log(galleryItems);
