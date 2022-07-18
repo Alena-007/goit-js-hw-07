@@ -3,8 +3,6 @@ import { galleryItems } from './gallery-items.js';
 
 const containerEl = document.querySelector('.gallery');
 
-// console.log(listEl);
-
 function createGalleryMarkup(array) {
     return array
         .map(
@@ -15,30 +13,29 @@ function createGalleryMarkup(array) {
         .join('');
 }
 
-// console.log(createGalleryMarkup(galleryItems));
-
 // containerEl.innerHTML = createGalleryMarkup(galleryItems);
 containerEl.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
-
 containerEl.addEventListener('click', openModal);
 
 function openModal(event) {
     event.preventDefault();
 
-    const instance = basicLightbox.create(
-        `<img src="${event.target.dataset.source}" width="800" height="600">`,
-        {
-            onShow: () => window.addEventListener('keydown', onClickEsc),
-            onClose: () => window.removeEventListener('keydown', onClickEsc),
-        }
-    );
-    instance.show();
-
-    function onClickEsc(event) {
-        if (event.keyCode === 27) {
-            instance.close();
-        }
+    if (event.target.classList.contains('gallery__image')) {
+        const instance = basicLightbox.create(
+            `<img src="${event.target.dataset.source}" width="800" height="600">`
+            // {
+            //     onShow: () => window.addEventListener('keydown', onClickEsc),
+            //     onClose: () => window.removeEventListener('keydown', onClickEsc),
+            // }
+        );
+        instance.show();
     }
+
+    // function onClickEsc(event) {
+    //     if (event.keyCode === 27) {
+    //         instance.close();
+    //     }
+    // }
 }
 
 console.log(galleryItems);
