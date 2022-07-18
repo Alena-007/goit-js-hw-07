@@ -22,20 +22,19 @@ function openModal(event) {
 
     if (event.target.classList.contains('gallery__image')) {
         const instance = basicLightbox.create(
-            `<img src="${event.target.dataset.source}" width="800" height="600">`
-            // {
-            //     onShow: () => window.addEventListener('keydown', onClickEsc),
-            //     onClose: () => window.removeEventListener('keydown', onClickEsc),
-            // }
+            `<img src="${event.target.dataset.source}" width="800" height="600">`,
+            {
+                onShow: () => window.addEventListener('keydown', onClickEsc),
+                onClose: () => window.removeEventListener('keydown', onClickEsc),
+            }
         );
+        const onClickEsc = function (event) {
+            if (event.keyCode === 27) {
+                instance.close();
+            }
+        };
         instance.show();
     }
-
-    // function onClickEsc(event) {
-    //     if (event.keyCode === 27) {
-    //         instance.close();
-    //     }
-    // }
 }
 
 console.log(galleryItems);
